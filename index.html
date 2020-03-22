@@ -4,28 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Final Fantasy VII!</title>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+    <script src="./assets/javascript/game.js"></script>
+    
 </head>
 <body>
     <div class="main-title text-center col-md-12 ">Final Fantasy VII RPG</div>
     <div id ="game-section">
         <br>
         <!-- Where the characters are going to be selected-->
-        <div id="your-Char"></div>
-            <div  class="title text-center col-md-4">Choose your Character</div>
-            <img class="characters" src="./assets/images/0.png.png" alt="Cloud Strife">
-            <img class="characters" src="./assets/images/1.png.png" alt="Barret Wallace">
-            <img class="tifaChar" src="./assets/images/2.png" alt="Tifa Lockhart">
-            <img class="characters" src="./assets/images/4.png.png" alt="Sephiroth">
+        <div id="character-section"></div>
+            <div  class="title">Choose your Character</div>
+         
+        <!--Where your selected character goes-->
+        <div id="select-Char">
+            <div class="section-title"> Your Character</div>
+            <div id="selected-char"></div>
+        </div>
+        <br><br><br><br>
+        <div id="chosen-enemy">
+            <div class="section-title"> Choose your Enemy</div>
         </div>
 
-        <!--where your character will be-->
-        <div id="select-Char">
+        <div class="section-title-fight ">Fight Arena</div>
+        <div id="fight-arena ">
+            <button id="attack-button">Attack</button>
+        </div>
+        <div id="action">
+            <div class="character-section">
+                <div class="section-title-enemy ">Enemy</div>
+                <div id="enemy"></div>
+            </div>
         </div>
         <div id="message"></div>
+    </div>
 </body>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="./assets/javascript/game.js"></script>
+
 </html>
