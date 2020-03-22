@@ -5,53 +5,52 @@ body{
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
+    font-family: 'Reactor7'
     
+    
+}
+@font-face{
+    font-family: "Reactor7";
+    src: url(/assets/css/fonts/Reactor7.woff);
+    font-size: 20px;
 }
 .main-title{
     font-size: 55px;
-    color: azure;
-    font-family: 'Ubuntu', sans-serif;
+    color: rgb(70, 247, 247);
+    font-family: 'Reactor7'
+    
 }
 .title{
     font-size: 45px;
-    color: azure;
-    font-family: 'Ubuntu', sans-serif;
-}
-.characters{
-    display: inline;
-  height: 150px;
-  width: 179px;
-  align-content: center;
-  border: beige solid;
-  
-}
-.tifaChar{
-    display: inline;
-    width: 86px;
-    height: 150px;
-    align-content: center;
-    border: beige solid;   
-}
-.section-title{
-    color: azure;
-    font-size: xx-large;
-    font-family: 'Ubuntu', sans-serif;
+    color: rgb(105, 241, 241);
     
 }
-.section-title-fight{
-    color: azure;
-    font-size: 45px;
-    font-family: 'Ubuntu', sans-serif;
+.character{
+  display: inline-block;
+  height: 150px;
+  width: 179px;
+  cursor: pointer ;
+  border: beige solid 1px;
+  
+}
+.character-image{
+    padding-right: 16px;
+    padding-left: 16px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.character-name{
     text-align: center;
+    font-family: 'Reactor7', sans-serif;
+    font-size: 20px;
 }
-.section-title-enemy{
+.character-health{
     text-align: center;
-    color: azure;
-    font-size: 45px;
-    margin-top: 25px;
+    color:rgb(8, 8, 8);
+    font-family: 'Reactor7', sans-serif;
+    font-size: 20px;
 }
-#attack-button{
-    position: absolute;
-    left: 48.5%;
+img{
+    height: 100px;
+    
 }
-
