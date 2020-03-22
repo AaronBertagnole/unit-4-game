@@ -1,10 +1,9 @@
 //Final Fantasy 7
-
 $(document).ready(function () {
 
     // Character object & stats
 
-  characters = {
+  var characters = {
     "Cloud Strife":{
        name: "Cloud Strife",
        healthPoints: 130,
@@ -12,8 +11,8 @@ $(document).ready(function () {
        counterAttackPower: 15,
        imageUrl: "./assets/images/0.png.png"
     },
-    "Barrey Wallace":{
-      name: "Barrey Wallace",
+    "Barret Wallace":{
+      name: "Barret Wallace",
       healthPoints: 150,
       attackPower: 6,
       counterAttackPower: 13,
@@ -33,9 +32,29 @@ $(document).ready(function () {
       counterAttackPower: 25,
       imageUrl: "./assets/images/4.png.png"
     }  
-  }
+  };
   console.log(characters);
+  //  this function will show the characters
+  var showOne = function(characters, showArea) {
+      var charDiv = $("<div class='character' data-name = '" + characters.name + "'>");
+      var charName = $("<div class='character-name'>").text(characters.name);
+      var charImage = $("<img alt='image' class='character-image'>").attr("src", characters.imageUrl);
+      var charHp = $("<div class= 'character-health'>").text(characters.healthPoints);
+      charDiv.append(charName).append(charImage).append(charHp);
+      $(showArea).append(charDiv);
+  }
 
+  var showChar = function(charObj, showArea) {
+      if (showArea === "#character-section") {
+         $(showArea).empty();
+         for (var key in charObj) {
+              if (charObj.hasOwnProperty(key)) {
+                showOne(charObj[key], showArea);
+             }
+         }
+      }
+  }
+    showChar(characters, "#character-section");
     
 });
  
