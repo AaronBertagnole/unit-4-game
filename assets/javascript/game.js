@@ -19,29 +19,29 @@ $(document).ready(function () {
       imageUrl: "./assets/images/1.png.png"
     },
     "Tifa Lockhart":{
-      name: "Tifa Lockhart ",
+      name: "Tifa Lockhart",
       healthPoints: 100,
       attackPower: 5,
       counterAttackPower: 10,
       imageUrl: "./assets/images/2.png"
     },
     "Sephiroth":{
-      name: "Sephiroth ",
+      name: "Sephiroth",
       healthPoints: 180,
       attackPower: 7,
       counterAttackPower: 25,
       imageUrl: "./assets/images/4.png.png"
     }
-
   };
   var currentChar;
   var fighters = [];
   var currentEnemy;
-  
+  var turnCounter = 1;
+  var killCount = 0;
   //  this function will show the characters
   var showOne = function(characters, showArea, charStatus ) {
-      var charDiv = $("<div class='character' data-name = '" + characters.name + "'>");
-      var charName = $("<div class='character-name'>").text(characters.name);
+      var charDiv = $("<div class= 'character' data-name = '" + characters.name + "'>");
+      var charName = $("<div class= 'character-name'>").text(characters.name);
       var charImage = $("<img alt='image' class='character-image'>").attr("src", characters.imageUrl);
       var charHp = $("<div class= 'character-health'>").text(characters.healthPoints);
       charDiv.append(charName).append(charImage).append(charHp);
@@ -55,11 +55,12 @@ $(document).ready(function () {
         currentEnemy = characters;
         $(charDiv).addClass("target-enemy");
       }
+      console.log(charDiv);
   }
       //this function will render the characters to the screen
   var showChar = function(charObj, showArea) {
 
-    //charcter section is where your chars begin
+    //character section is where your chars begin
     //if true shows all characters in the starting area 
       if (showArea === "#character-section") {
          $(showArea).empty();
@@ -74,7 +75,7 @@ $(document).ready(function () {
 
       //selected-character is where our selected character will appear
       //and if its true it will show the selected players char here
-      if (showArea === "#select-char");
+      if (showArea === "#selected-char");
       showOne(charObj,showArea, " ");
      
 
@@ -103,7 +104,21 @@ $(document).ready(function () {
           }
       }
 
-  }
+      // render the enemy again when attacked
+      if (showArea === "playerDamage"){
+        $("#enemy").empty();
+        showOne(charObj, "#enemy","enemy");
+      }
+
+      if (showArea === "enemyDamage"){
+          $("currentChar").empty();
+          showOne(charObj, "#selected-char", "");         
+      }
+
+      if(showArea === "enemyDefeated"){
+        $("#enemy").empty();
+      }
+  };
 
     showChar(characters, "#character-section");
     
@@ -124,7 +139,7 @@ $(document).ready(function () {
         //hide  character select div
         $("#character-section").hide();
 
-        showChar(currentChar, "#select-char");
+        showChar(currentChar, "#selected-char");
         showChar(fighters, "#chosen-enemy");
      }
     });
@@ -135,8 +150,20 @@ $(document).ready(function () {
              // check if enemy has health left
              if(currentEnemy.healthPoints>0){
                
+              showChar(currentEnemy,"playerDamage");
+
+              currentChar.healthPoints -= currentEnemy.counterAttackPower;
+
+              showChar(currentChar, "enemyDamage");
+
              }
           }
+          else{
+            showChar(currentEnemy, "enemyDefeated");
+            killCount++
+            if(killCount >=3);
+          }
+
            turnCounter++; 
     });
 });
