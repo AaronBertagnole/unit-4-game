@@ -11,19 +11,17 @@ body{
 }
 @font-face{
     font-family: "Reactor7";
-    src: url(/assets/css/fonts/Reactor7.woff);
-    font-size: 20px;
+    src: url(./fonts/Reactor7.woff);
+    font-size: 35px;
 }
 .main-title{
     font-size: 55px;
     color: rgb(70, 247, 247);
-    font-family: 'Reactor7'
-    
+    font-family: 'Reactor7';
 }
 .title{
     font-size: 45px;
     color: rgb(105, 241, 241);
-    
 }
 .character{
   display: inline-block;
@@ -42,7 +40,7 @@ body{
 .character-name{
     text-align: center;
     font-family: 'Reactor7', sans-serif;
-    font-size: 20px;
+    font-size: 25px;
 }
 .character-health{
     text-align: center;
@@ -53,4 +51,8 @@ body{
 img{
     height: 100px;
     
+}
+.section-title{
+    font-family: 'Reactor7', sans-serif;
+    font-size: 30px;
 }
