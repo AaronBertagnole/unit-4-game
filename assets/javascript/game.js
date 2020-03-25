@@ -57,8 +57,23 @@ $(document).ready(function () {
       }
       console.log(charDiv);
   }
+      //function to show game messages.
+      var renderMessage = function(message){
+
+        //builds the message and appends it to the page
+        var gameMessage = $("#game-message");
+        var newMessage = $("<div>").text(message);
+        gameMessage.append(newMessage);
+
+        //if we get this specific message clear the message again
+        if (message === "clearMessage"){
+          gameMessageSet.text("");
+        }
+      };
+
+
       //this function will render the characters to the screen
-  var showChar = function(charObj, showArea) {
+      var showChar = function(charObj, showArea) {
 
     //character section is where your chars begin
     //if true shows all characters in the starting area 
@@ -91,6 +106,7 @@ $(document).ready(function () {
             if($("#enemy").children().length === 0){
               showChar(name, "#enemy");
               $(this).hide();
+              renderMessage("clearMessage");
             }
       });
    }
@@ -117,6 +133,8 @@ $(document).ready(function () {
 
       if(showArea === "enemyDefeated"){
         $("#enemy").empty();
+        var gameStateMessage = ("You jave defeated " +charObj.name + ", you can choose to fight another enemy.");
+        renderMessage(gameStateMessage);
       }
   };
 
@@ -125,7 +143,7 @@ $(document).ready(function () {
     $(document).on("click", ".character", function() {
       var name = $(this).attr("data-name");
     
-      //if play has not been chosen
+      //if player has not been chosen
      if (!currentChar){
        // populate currentChar with the selected character
        currentChar =characters[name];
@@ -144,8 +162,10 @@ $(document).ready(function () {
      }
     });
         $("attack-button").on("click", function(){
+
           if($("#enemy").children().length !== 0){
              currentEnemy.healthPoints -= (currentChar.attackPower = turnCounter);
+             
               
              // check if enemy has health left
              if(currentEnemy.healthPoints>0){
@@ -161,7 +181,9 @@ $(document).ready(function () {
           else{
             showChar(currentEnemy, "enemyDefeated");
             killCount++
-            if(killCount >=3);
+              if(killCount >=3){
+
+              }
           }
 
            turnCounter++; 
