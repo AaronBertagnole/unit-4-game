@@ -24,7 +24,7 @@ $(document).ready(function() {
       counterAttackPower: 10,
       imageUrl: "./assets/images/2.png"
     },
-    Sephiroth: {
+    "Sephiroth": {
       name: "Sephiroth",
       healthPoints: 180,
       attackPower: 7,
@@ -112,10 +112,42 @@ $(document).ready(function() {
     }
   };
 
+
+  var fightCycle = function (currentChar, enemyChar){
+      if(currentChar.healthPoints > 0 && enemyChar.healthPoints > 0){
+        currentChar.healthPoints -= enemyChar.counterAttackPower;
+        enemyChar.healthPoints -= currentChar.attackPower;
+      }
+
+      // current char is dead
+      if(currentChar.healthPoints<=0){
+        restartGame("You have been defeated");
+      }
+
+      // enemy char is dead
+      if(enemyChar.healthPoints <= 0){
+        killCount++;
+        alert("Defeated " + enemyChar.name);
+
+        $("#defender").empty();
+      }
+
+      // both could technically be dead
+
+
+      // currentChar has defeated all three
+      
+      console.log(currentChar)
+      console.log(enemyChar);
+      $("#selected-char .character-health").html(currentChar.healthPoints);
+      $("#defender .character-health").html(enemyChar.healthPoints);
+  }
+
   //this function will render the characters to the screen
   var showChar = function(charObj, showArea, attack) {
     //character section is where your chars begin
     //if true shows all characters in the starting area
+
     if (showArea === "#character-section") {
       $(showArea).empty();
       if(attack){
@@ -187,9 +219,13 @@ $(document).ready(function() {
       location.reload();
     });
 
-    var gameState = $("div").text(inputEndGame);
+    $("#attack-button").hide();
+    $("#defender").empty();
+    $("#selected-char").empty();
 
-    $("body").html(gameState);
+   // var gameState = $("div").text(inputEndGame);
+
+   // $("body").html(gameState);
     $("body").append(restart);
   };
 
@@ -223,6 +259,13 @@ $(document).ready(function() {
   $("#attack-button").on("click", function() {
     
     
+
+    fightCycle(currentChar, currentEnemy);
+
+    // When attack is pressed, decrease everyone's health
+
+
+    /*
     if ($("#defender").children().length !== 0) {
 
       
@@ -259,7 +302,7 @@ $(document).ready(function() {
         restartGame("You have been defeated");
         $("attack-button").unbind("click");
       } 
-    }
+    }*/
 
     turnCounter++;
   });
