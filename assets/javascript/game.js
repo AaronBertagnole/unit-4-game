@@ -113,14 +113,16 @@ $(document).ready(function() {
   };
 
 
-  var fightCycle = function (currentChar, enemyChar){
+  var fightCycle = function (currentChar, enemyChar, turnCounter){
       if(currentChar.healthPoints > 0 && enemyChar.healthPoints > 0){
         currentChar.healthPoints -= enemyChar.counterAttackPower;
-        enemyChar.healthPoints -= currentChar.attackPower;
+        enemyChar.healthPoints -= currentChar.attackPower * turnCounter;
       }
 
       // current char is dead
       if(currentChar.healthPoints<=0){
+        alert("You died");
+        $("#chosen-enemy").empty();
         restartGame("You have been defeated");
       }
 
@@ -132,13 +134,11 @@ $(document).ready(function() {
         $("#defender").empty();
       }
 
-      // both could technically be dead
-
-
-      // currentChar has defeated all three
+      if(killCount === 3){
+        alert("You have killed them all!! You Won!!");
+        restartGame();
+      }
       
-      console.log(currentChar)
-      console.log(enemyChar);
       $("#selected-char .character-health").html(currentChar.healthPoints);
       $("#defender .character-health").html(enemyChar.healthPoints);
   }
@@ -184,8 +184,6 @@ $(document).ready(function() {
         }
       });
     
-    //
-    //
     if (showArea === "#defender") {
       $(showArea).empty();
       for (var i = 0; i < fighters.length; i++) {
@@ -194,24 +192,6 @@ $(document).ready(function() {
         }
       }
     }
-
-    // render the enemy again when attacked
-    if (showArea === "playerDamage") {
-     // $("#defender").empty();
-      showOne(charObj, "defender", "", true);
-    }
-
-    if (showArea === "enemyDamage") {
-     // $("currentChar").empty();
-      showOne(charObj, "#selected-char", "", true);
-    }
-
-    if (showArea === "enemyDefeated") {
-     // $("#defender").empty();
-      var gameStateMessage =   "You have defeated " + charObj.name + ", you can choose to fight another enemy.";
-      renderMessage(gameStateMessage);
-    }
-    
   };
 
   var restartGame = function(inputEndGame) {
@@ -222,10 +202,7 @@ $(document).ready(function() {
     $("#attack-button").hide();
     $("#defender").empty();
     $("#selected-char").empty();
-
-   // var gameState = $("div").text(inputEndGame);
-
-   // $("body").html(gameState);
+   
     $("body").append(restart);
   };
 
@@ -249,61 +226,15 @@ $(document).ready(function() {
       //hide  character select div
       $("#character-section").hide();
 
-      
-
-
       newFunction(currentChar, "#selected-char", "", true);
       showChar(fighters, "#chosen-enemy", "" , true);
     }
   });
+
+  // When attack is pressed, decrease everyone's health
+
   $("#attack-button").on("click", function() {
-    
-    
-
-    fightCycle(currentChar, currentEnemy);
-
-    // When attack is pressed, decrease everyone's health
-
-
-    /*
-    if ($("#defender").children().length !== 0) {
-
-      
-      var attackMessage = "You attacked " +  currentEnemy.name + " for " + currentChar.attackPower * turnCounter + " damage.";
-      var counterAttackMessage = currentEnemy.name + " attacked you for " + currentEnemy.counterAttackPower +  " damage.";
-      //renderMessage("clearMessage");
-
-      // reduce defenders health by attack value
-      currentEnemy.healthPoints -= currentChar.attackPower * turnCounter;
-      
-
-      // check if enemy has health left
-      console.log(currentEnemy.healthPoints);
-      if (currentEnemy.healthPoints > 0) {
-        showChar(currentEnemy, "enemyDamage", true);
-
-        renderMessage(attackMessage);
-        renderMessage(counterAttackMessage);
-
-        currentChar.healthPoints -= currentEnemy.counterAttackPower;
-
-        showChar(currentChar, "enemyDamage");
-      }else {
-        showChar(currentEnemy, "enemyDefeated");
-        
-        killCount++;
-        if (killCount >= 3) {
-          renderMessage("clearMessage");
-          restartGame("you Win!");
-        }
-      }
-      if (currentChar.healthPoints <= 0) {
-        renderMessage("clearMessage");
-        restartGame("You have been defeated");
-        $("attack-button").unbind("click");
-      } 
-    }*/
-
+    fightCycle(currentChar, currentEnemy, turnCounter);
     turnCounter++;
   });
 });
