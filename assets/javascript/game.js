@@ -121,9 +121,9 @@ $(document).ready(function() {
 
       // current char is dead
       if(currentChar.healthPoints<=0){
-        alert("You died! Continue?");
+        alert("You died! ");
         $("#chosen-enemy").empty();
-        restartGame("You have been defeated");
+        restartGame('Continue?');
       }
 
       // enemy char is dead
