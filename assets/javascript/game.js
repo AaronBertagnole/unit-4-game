@@ -28,7 +28,7 @@ $(document).ready(function() {
       name: "Sephiroth",
       healthPoints: 180,
       attackPower: 7,
-      counterAttackPower: 25,
+      counterAttackPower: 19,
       imageUrl: "./assets/images/4.png.png"
     }
   };
@@ -121,7 +121,7 @@ $(document).ready(function() {
 
       // current char is dead
       if(currentChar.healthPoints<=0){
-        alert("You died");
+        alert("You died! Continue?");
         $("#chosen-enemy").empty();
         restartGame("You have been defeated");
       }
